@@ -1,0 +1,128 @@
+----------- // -------------- // ---------------- //
+
+git config --global user.name "user"
+git config --local user.email "email@gmail.com"
+git config user.name
+git config user.email
+
+----------- // -------------- // ---------------- //
+
+git init: inicia um repositório
+git init --bare: inicia um repositório vazio, para ser utilizado como servidor, onde só armazenará os commits e não os arquivos
+
+git status: mostra o status do repositorio (se tem algum arquivo para ser empacotado ou comitado),
+git status -s: mostra o status dos arquivos de forma resumida
+
+git add "nome-do-arquivo": adiciona o arquivo ao stage
+git add .: empacota os arquivos pode ser utilizados com o nome do arquivo para empacotar um arquivo específico,
+
+git commit -m "mensagem no pacote": envia os arquivos empacotados para o repositorio de versionamento
+git commit --amend -m "alterar a mensagem do commit"
+
+git revert "hashDoCommit": remove o commit do git               (git log para ver o hash)
+git reset --soft HEAD^: reset commit and keep the changes in staged
+git restore "nomeDoArquivo" --staged: retorna ao estado modified
+git restore "nomeDoArquivo": remove as alterações e retorna o código ao estado unmodified
+git reset HEAD "nomeDoArquivo": romove arquivos staged do status
+git checkout -- "nomeDoArquivo": remove arquivos untracked do status 
+
+(To recover an "accidentally" deleted commit)
+git reflog --no-abbrev: ref of all commits with complete SHA
+git checkout -b your-branch sha: checktou to SHA branch
+
+git stash: diciona as modificações em um local temporario
+git stash list: mostra a lista de modificações desse local
+git stash aply "index": aplica as modificações do index guardadas e retorna pro arquivo
+git stash drop "index": remove a modificação com o index indicado da lista 
+git stash pop: aplica as modificações e remove o ultimo arquivo da lista
+
+git log: apresenta o histórico de commits do repositório,
+git log  --oneline: mostra o log de commits de forma resumida
+git log -p: mostra o log de commits com as alterações que foram feitas
+
+git show: apresenta as alteraçãoes feitas nos arquivos commitados,
+
+git diff (--staged): mostra o que foi editado mas não foi adicionado ainda para commitar
+git diff "hashInicial".."hashFinal": mostra o que foi alterado de uma hash até a outra (dois pontos significam até)
+git diff "branchName".."branchName": mostra as alterações em dois branchs, os branchs vao dentro de
+
+git branch "nome do branch": cria uma nova branch
+git checkout "nomeDoBranch": muda para a branch
+git checkout -b "nomeDaBranch": cria uma branch e move para ela
+
+git branch -M "newName": renomeia uma branch
+git merge "branch": adicionar as alterações da branch na master 
+git rebase "branch": adiciona os commits da branch na master sem fazer o merge 
+
+git checkout "hashDoCommit": vai para a versão do commit
+git checkout -b "nomeDaBranch": cria uma nova branch a partir do commit
+
+git remote add "nomeDoRepositorio" "urlDoRepositorioRemoto": adiciona o repositório atual a um repositório remoto 
+git remote set-url origin git@github.com-gitConfigUserName:githubname/repositorie.git
+git remote -v: mostra os repositórios remotos conectados 
+git remote rename "remoteName" "newRemoteName": renomeia o repositório remoto do repositorio atual git remote -v: show de origin of the repositoriegit
+
+git push origin main: empurra o repositorio local para o remoto
+git pull origin main: puxa o repositorio remoto para o local
+git fetch: traz as modificações do repositório remoto mas não faz o merge automático como o pull
+git clone "urlDoRepositorio" "novoNome": clona o repositório com um novo nove
+git tag -a "versionName": cria uma versão ou uma realese
+git push origin "versionName" -m "mensagem": sobe para o gitHub a versão
+
+----------- // -------------- // ---------------- //
+.gitignore
+
+nome-do-arquivo                 -> Adiciona um arquivo ao gitignore
+nome-da-pasta/                  -> Adiciona uma pasta ao gitignore
+
+obs: commitar o .gitignore
+
+----------- // -------------- // ---------------- //
+token
+
+in github generate token in profile settings - developer settings - personal acess tokens
+select the repo, write and delete packages permissions and generate token,
+
+in gitbash 
+git remote add origin https://github.com/profileName/repositoryName.git
+git branch -M main
+
+--------------- // -----------------// --------------------
+ssh
+
+$ ls -al ~/.ssh {command in bash to see all ssh file keys}
+$ ssh-keygen -t ed25519 -C "your_email@example.com" {to create a key}
+(/c/Users/YOU/.ssh/id_ALGORITHM):[Press enter] {modify the path to don't subscripe the existents}
+$ eval "$(ssh-agent -s)"  {to start the ssh agent}
+$ ssh-add ~/.ssh/id_ed25519 {to add the key to agent}
+cat < ~/.ssh/id_keyname.pub | clip  {concate a ssh key file and clip to ctrl+c
+in github profile settings ssh option add the ssh key and paste
+in ~./ssh/ create a config file without extensions and add
+
+{
+# Conta pessoal como default
+Host github.com
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/id_rsa_pessoal
+   
+# Conta do trabalho
+Host github.com-trabalho  
+   HostName github.com
+   User git
+   IdentityFile ~/.ssh/id_rsa_trabalho
+}
+
+$ git rename origin main
+$ git remote add origin git@github.com-trabalho:githubname/repositorie.git {ssh-key}
+or 
+$ git remote set-url git@github.com-trabalho:githubname/repositorie.git {ssh-key}
+
+--------------- // -----------------// --------------------
+Vim
+
+q       -> Quit
+Yes     -> yes to all
+x       -> Acept changes
+
+--------------- // -----------------// --------------------
